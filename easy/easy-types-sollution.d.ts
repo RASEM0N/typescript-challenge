@@ -1,5 +1,3 @@
-type A = Exclude<any, any>
-
 declare namespace EaseTS {
     // вычлиняем определенные свойства объекта
     type Pick<T extends object, P extends keyof T> = {
