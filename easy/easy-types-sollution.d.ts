@@ -11,7 +11,7 @@ declare namespace EaseTS {
 
     // из массива значений преобразуем в объект, где ключ равен значению
     type TupleToObject<T extends readonly any[]> = {
-        // преобразование [1,2,3,4,5] в 1|2|3|4|5
+        // преобразование [1,2,3,4,5] в { 1: 1, 2: 2, 3: 3...}
         [key in T[number]]: key
     }
 
