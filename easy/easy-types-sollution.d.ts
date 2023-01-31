@@ -26,8 +26,35 @@ declare namespace EaseTS {
     type Include<T, P> = T extends P ? T : never
 
     // получим возвращаемый тип в промисе
-    type Awaited<T> = T extends Promise<infer P> ? P : never;
+    type Awaited<T> = T extends Promise<infer P> ? P : never
 
     // выбираем между двумя типа в зависимости от значение
-    type If<T extends boolean, A1, A2> = T extends true ? A1 : A2;
+    type If<T extends boolean, A1, A2> = T extends true ? A1 : A2
+
+    /**
+     * -------------------
+     * Действия с массивом
+     * -------------------
+     */
+
+    // склеиваем массивы
+    type Concat<T extends any[], P extends any[]> = [...T, ...P]
+
+    // проверим на наличие элемента в массиве
+    type Includes<T extends any[], P> = T extends [infer A, ...infer B]
+        ? // определяем тип каждого 1-ого элемента массива, элемент A
+          // если не нашли по новой ищем совпадение
+          P extends A
+            ? true
+            : Includes<B, P>
+        : false;
+
+    // Добавим новый элемент в конец массива
+    type Push<T extends any[], P> = [...T, P];
+
+    // Добавим новый элемент в начало массива
+    type Unshift<T extends any[], P> = [P, ...T];
+
+    // действия по взятию параметров фунции
+    type Parameters<T> = T extends (...params: infer P) => any ? P : never;
 }

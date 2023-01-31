@@ -83,4 +83,31 @@
     const b: EaseTS.If<false, 'a', 'b'> = 'b';
 }
 
+// склеиваем массивы вместе
+{
+    type result = EaseTS.Concat<[1, 'a'], [2]>;
+    const result: result = [1, 'a', 2];
+}
+
+// проверим на наличие элемнта
+{
+    type isNotHas = EaseTS.Includes<['Kars', 'Santana'], 'Dio'>
+    type isHas = EaseTS.Includes<['Kars', 'Dio'], 'Dio'>
+
+    const isNotHas: isNotHas = false;
+    const isHas: isHas = true;
+}
+
+// добавление нового элемента в массив
+{
+    const x: EaseTS.Push<[1], 3> = [1, 3];
+    const x1: EaseTS.Unshift<[1], 3> = [3, 1];
+}
+
+// получение параметров функции
+{
+    const foo = (a: number, b: string): number => a + + b;
+    const fooParams: EaseTS.Parameters<typeof foo> = [1, '01']
+}
+
 export {}
